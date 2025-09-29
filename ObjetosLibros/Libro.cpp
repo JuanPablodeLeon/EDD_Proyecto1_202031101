@@ -2,7 +2,10 @@
 // Created by juanp on 23/09/2025.
 //
 
-#include "Libro.h"
+#include "../ArchivosH/Libro.h"
+
+#include <iostream>
+#include <ostream>
 
 Libro::Libro() {}
 
@@ -65,4 +68,14 @@ void Libro::setFecha(std::string fecha)
 void Libro::setAutor(std::string autor)
 {
     this->autor = autor;
+}
+
+void Libro::imprimirInformacion()
+{
+    std::cout << "Titulo: " << getTitulo() << std::endl;
+    std::cout << "ISBN: " << getISBN() << std::endl;
+    std::cout << "Genero: " << getGenero() << std::endl;
+    std::cout << "Fecha: " << getFecha() << std::endl;
+    std::cout << "Autor: " << getAutor() << std::endl;
+
 }

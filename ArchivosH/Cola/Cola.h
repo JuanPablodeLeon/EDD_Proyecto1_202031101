@@ -7,7 +7,7 @@
 #include <iostream>
 #include <ostream>
 
-#include "../Nodo/Nodo.h"
+#include "../Nodos/Nodo.h"
 
 template <typename T>
 class Cola

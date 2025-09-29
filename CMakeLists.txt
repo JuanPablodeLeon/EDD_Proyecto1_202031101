@@ -4,10 +4,13 @@ project(EDD_Proyecto1_202031101)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(EDD_Proyecto1_202031101 main.cpp
-        Estructuras/Nodo/Nodo.h
-        Estructuras/Pila/Pila.h
-        Estructuras/Cola/Cola.h
-        Estructuras/ListaEnlazada/ListaEnlazadaSimple.h
+        ArchivosH/Pila/Pila.h
+        ArchivosH/Cola/Cola.h
         Arboles/arbol_AVL.cpp
         ObjetosLibros/Libro.cpp
-        ObjetosLibros/Libro.h)
+        ArchivosH/Libro.h
+        Estructuras/Nodos/Nodo.cpp
+        ArchivosH/Nodos/Nodo.h
+        Estructuras/ListaEnlazada/Lista.cpp
+        ArchivosH/ListaEnlazada/Lista.h
+)

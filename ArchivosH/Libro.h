@@ -31,6 +31,8 @@ public:
     void setGenero(std::string genero);
     void setFecha(std::string fecha);
     void setAutor(std::string autor);
+
+    void imprimirInformacion();
 };
 
 
