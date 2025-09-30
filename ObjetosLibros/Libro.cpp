@@ -72,10 +72,10 @@ void Libro::setAutor(std::string autor)
 
 void Libro::imprimirInformacion()
 {
-    std::cout << "Titulo: " << getTitulo() << std::endl;
-    std::cout << "ISBN: " << getISBN() << std::endl;
+    std::cout << "|| " << getTitulo() << "  || " << getISBN() << "  ||  " << getGenero() <<"  ||  " << getFecha() <<"  ||  " << getAutor() << "  ||" << std::endl;
+   /* std::cout << "ISBN: " << getISBN() << std::endl;
     std::cout << "Genero: " << getGenero() << std::endl;
     std::cout << "Fecha: " << getFecha() << std::endl;
-    std::cout << "Autor: " << getAutor() << std::endl;
+    std::cout << "Autor: " << getAutor() << std::endl;*/
 
 }

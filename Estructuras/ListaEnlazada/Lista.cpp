@@ -41,7 +41,7 @@ void Lista::imprimir()
     {
         std::cout << "Lista Vacia" << std::endl;
     }
-
+    std::cout <<"||	Titulo	||	ISBN	||	Genero	||	Fecha	||	Autor	||"<< std::endl;
     Nodo* actual = primero;
     for (int i=0; i<size; i++)
     {
@@ -53,6 +53,7 @@ void Lista::imprimir()
 
 Nodo* Lista::buscar(Libro libro)
 {
+
     Nodo* actual = primero;
 
     while (actual)
