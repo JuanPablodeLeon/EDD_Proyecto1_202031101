@@ -3,6 +3,10 @@ project(EDD_Proyecto1_202031101)
 
 set(CMAKE_CXX_STANDARD 20)
 
+include_directories(ArchivosH)
+include_directories(ArchivosH/Funciones)
+include_directories(ArchivosH/ListaEnlazada)
+
 add_executable(EDD_Proyecto1_202031101 main.cpp
         ArchivosH/Pila/Pila.h
         ArchivosH/Cola/Cola.h
@@ -13,8 +17,8 @@ add_executable(EDD_Proyecto1_202031101 main.cpp
         ArchivosH/Nodos/Nodo.h
         Estructuras/ListaEnlazada/Lista.cpp
         ArchivosH/ListaEnlazada/Lista.h
-        Funciones/Menu.cpp
-        ArchivosH/Funciones/Menu.h
         Funciones/CargaCSV.cpp
         ArchivosH/Funciones/CargaCSV.h
+        Funciones/Funcionalidades.cpp
+        ArchivosH/Funciones/Funcionalidades.h
 )
