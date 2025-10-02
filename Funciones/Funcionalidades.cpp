@@ -141,9 +141,16 @@ void Funcionalidades::cargarCSV()
 
                     if (esFechaValida(fecha) && esISBNValida(isbn))
                     {
-                        listaOrdenada->insertar(Libro(titulo, isbn,genero,fecha,autor));
-                        listaSinOrdenar->insertar(Libro(titulo, isbn,genero,fecha,autor));
-                        librosValidos++;
+                        if (listaOrdenada->buscarISBN(isbn) == nullptr)
+                        {
+                            listaOrdenada->insertar(Libro(titulo, isbn,genero,fecha,autor));
+                            listaSinOrdenar->insertar(Libro(titulo, isbn,genero,fecha,autor));
+                            librosValidos++;
+                        }
+                        else
+                        {
+                            librosRepetidos++;
+                        }
                     }
                     else
                     {
@@ -172,7 +179,7 @@ void Funcionalidades::cargarCSV()
     std::cout<<"Libros Cargados a la Biblioteca"<< std::endl;
     std::cout <<"Libros Validos: "<< librosValidos <<std::endl;
     std::cout <<"Libros No Validos: "<< librosNoValidos <<std::endl;
-
+    std::cout <<"Libros Repetidos: "<< librosRepetidos <<std::endl;
 }
 
 void Funcionalidades::buscarISBN()
