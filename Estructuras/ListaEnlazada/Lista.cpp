@@ -13,9 +13,18 @@ Lista::Lista()
     size = 0;
 }
 
-Lista::~Lista() {}
+Lista::~Lista()
+{
+    Nodo* actual = primero;
+    while (actual != nullptr)
+    {
+        Nodo* temp = actual;
+        actual = actual->getSiguiente();
+        delete temp;
+    }
+}
 
-void Lista::insertar(Libro libro)
+void Lista::insercion(Libro libro)
 {
     Nodo* nuevo = new Nodo(libro);
 
@@ -51,7 +60,7 @@ void Lista::imprimir()
     }
 }
 
-Nodo* Lista::buscar(Libro libro)
+/*Nodo* Lista::buscar(Libro libro)
 {
 
     Nodo* actual = primero;
@@ -65,4 +74,43 @@ Nodo* Lista::buscar(Libro libro)
         actual = actual->getSiguiente();
     }
     return nullptr;
+}*/
+
+bool Lista::eliminacionSecuencia(std::string ISBN)
+{
+    if (!primero)
+    {
+        return false;
+    }
+
+    //Si el Libro es el primero en la Lista
+    if (primero->getLibro().getISBN() == ISBN)
+    {
+        Nodo* temp = primero;
+        primero = primero->getSiguiente();
+        delete temp;
+        size--;
+        return true;
+    }
+
+    //Sino se Encuentra primero en la lista
+    Nodo* actual = primero;
+    while (actual->getSiguiente() != nullptr)
+    {
+        if (actual->getSiguiente()->getLibro().getISBN() == ISBN)
+        {
+            Nodo* temp = actual->getSiguiente();
+            actual->setSiguiente(temp->getSiguiente());
+            delete temp;
+            size--;
+            return true;
+        }
+        actual = actual->getSiguiente();
+    }
+    return false;
+}
+
+bool Lista::estaVacia()
+{
+    return size == 0;
 }

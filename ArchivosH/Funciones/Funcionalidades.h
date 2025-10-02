@@ -11,12 +11,12 @@
 #include <sstream>
 #include <unordered_map>
 #include <iomanip>
-#include "../ArchivosH/ListaEnlazada/Lista.h"
+#include "../ArchivosH/ListaEnlazada/ListaNormal.h"
 
 class Funcionalidades
 {
 private:
-    Lista* listaSinOrdenar;
+    ListaNormal* listaSinOrdenar;
     void textoMenu();
     void cargarCSV();
  //   void buscarTitulo();

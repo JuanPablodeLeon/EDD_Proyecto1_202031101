@@ -6,7 +6,7 @@
 
 Funcionalidades::Funcionalidades()
 {
-    listaSinOrdenar = new Lista();
+    listaSinOrdenar = new ListaNormal();
 }
 
 Funcionalidades::~Funcionalidades()

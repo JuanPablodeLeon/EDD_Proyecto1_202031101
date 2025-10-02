@@ -17,8 +17,10 @@ add_executable(EDD_Proyecto1_202031101 main.cpp
         ArchivosH/Nodos/Nodo.h
         Estructuras/ListaEnlazada/Lista.cpp
         ArchivosH/ListaEnlazada/Lista.h
-        Funciones/CargaCSV.cpp
-        ArchivosH/Funciones/CargaCSV.h
         Funciones/Funcionalidades.cpp
         ArchivosH/Funciones/Funcionalidades.h
+        Estructuras/ListaEnlazada/ListaNormal.cpp
+        ArchivosH/ListaEnlazada/ListaNormal.h
+        Estructuras/ListaEnlazada/ListaOrdenada.cpp
+        ArchivosH/ListaEnlazada/ListaOrdenada.h
 )

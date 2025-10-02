@@ -5,8 +5,9 @@
 #ifndef EDD_PROYECTO1_202031101_LISTA_H
 #define EDD_PROYECTO1_202031101_LISTA_H
 #include "../Nodos/Nodo.h"
+#include <string>
 
-//Modificar para agregar ordenadamente y buscar serialmente y binario
+
 class Lista
 {
     private:
@@ -14,10 +15,16 @@ class Lista
         int size;
     public:
         Lista();
-        ~Lista();
-        void insertar(Libro libro);
-        void imprimir();
-        Nodo* buscar(Libro libro);
+        virtual ~Lista();
+        virtual void insertar(Libro libro) = 0;
+        virtual void imprimir();
+        //Nodo* buscar(Libro libro);
+
+        virtual bool eliminar(std::string ISBN);
+        bool estaVacia();
+    protected:
+        bool eliminacionSecuencia(std::string ISBN);
+        void insercion(Libro libro);
 };
 
 
