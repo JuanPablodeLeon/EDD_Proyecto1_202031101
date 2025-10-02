@@ -12,7 +12,6 @@ class ListaNormal : public Lista
     ListaNormal();
     ~ListaNormal();
     void insertar(Libro libro) override;
-    bool eliminar(std::string ISBN) override;
 };
 
 

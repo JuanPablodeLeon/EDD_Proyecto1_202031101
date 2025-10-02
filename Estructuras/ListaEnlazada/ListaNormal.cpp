@@ -13,8 +13,4 @@ void ListaNormal::insertar(Libro libro)
     insercion(libro);
 }
 
-bool ListaNormal::eliminar(std::string ISBN)
-{
-    return eliminacionSecuencia(ISBN);
-}
 

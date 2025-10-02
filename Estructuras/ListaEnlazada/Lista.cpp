@@ -60,23 +60,44 @@ void Lista::imprimir()
     }
 }
 
-/*Nodo* Lista::buscar(Libro libro)
+Libro* Lista::buscarTitulo(std::string titulo)
 {
+    MedidorTiempo timer("Busqueda Titulo Secuencial");
+    if (!primero) return nullptr;
 
     Nodo* actual = primero;
-
-    while (actual)
+    while (actual != nullptr)
     {
-        if (actual->getLibro().getTitulo() == libro.getTitulo())
+        if (actual->getLibro().getTitulo() == titulo)
         {
-            return actual;
+            return &(actual->getLibro());
         }
         actual = actual->getSiguiente();
     }
     return nullptr;
-}*/
+}
 
-bool Lista::eliminacionSecuencia(std::string ISBN)
+
+Libro* Lista::buscarISBN(std::string ISBN)
+{
+    MedidorTiempo timer("Busqueda ISBN Secuencial");
+
+    if (!primero) return nullptr;
+
+    Nodo* actual = primero;
+    while (actual != nullptr)
+    {
+        if (actual->getLibro().getISBN() == ISBN)
+        {
+            return &(actual->getLibro());
+        }
+        actual = actual->getSiguiente();
+    }
+    return nullptr;
+}
+
+
+bool Lista::eliminar(std::string ISBN)
 {
     if (!primero)
     {
@@ -108,6 +129,11 @@ bool Lista::eliminacionSecuencia(std::string ISBN)
         actual = actual->getSiguiente();
     }
     return false;
+}
+
+Nodo* Lista::getPrimero() const
+{
+    return this->primero;
 }
 
 bool Lista::estaVacia()

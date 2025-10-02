@@ -20,7 +20,15 @@ public:
     Nodo* getSiguiente() const;
     void setSiguiente(Nodo* siguiente);
 
-    Libro getLibro() const;
+    Libro& getLibro()
+    {
+        return this->libro;
+    }
+
+    const Libro& getLibro() const
+    {
+        return this->libro;
+    }
 };
 
 

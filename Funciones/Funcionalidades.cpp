@@ -7,11 +7,13 @@
 Funcionalidades::Funcionalidades()
 {
     listaSinOrdenar = new ListaNormal();
+    listaOrdenada = new ListaOrdenada();
 }
 
 Funcionalidades::~Funcionalidades()
 {
     delete listaSinOrdenar;
+    delete listaOrdenada;
 }
 
 
@@ -50,27 +52,30 @@ void Funcionalidades::menu()
     do
     {
         textoMenu();
-        std::cout <<"Ingrese Opcion a Escoger: ";
+        std::cout <<"Ingrese Opcion a Escoger:  ";
         std::cin >> opcion;
         switch (opcion)
         {
         case 1://Cargar El CSv
                 cargarCSV();
                 break;
+
         /*------- Buscquedas --------*/
         case 2: //Titulo
             break;
         case 3:// ISBN
+            buscarISBN();
             break;
         case 4: //Genero
             break;
         case 5: //Fecha
             break;
         /*------- Fin Busquedas --------*/
+
         case 6: //Eliminaciones
             break;
         case 7: //Listado por Titulos (AVL inorder)
-            listaSinOrdenar->imprimir(); //quitar despues
+            ListarLibros();
             break;
         case 8: //Graficas
             break;
@@ -96,8 +101,13 @@ void Funcionalidades::cargarCSV()
 
     std::string filename;
     std::cout<< "Ingrese la ruta del Archivo CSV: ";
-
     std::getline(std::cin, filename);
+
+    if (verificarComillas(filename))
+    {
+        filename = filename.substr(1, filename.length() - 2);
+    }
+
 
     std::ifstream file(filename);
     if (!file.is_open()) //En caso de no poder cargar el archivo
@@ -131,6 +141,7 @@ void Funcionalidades::cargarCSV()
 
                     if (esFechaValida(fecha) && esISBNValida(isbn))
                     {
+                        listaOrdenada->insertar(Libro(titulo, isbn,genero,fecha,autor));
                         listaSinOrdenar->insertar(Libro(titulo, isbn,genero,fecha,autor));
                         librosValidos++;
                     }
@@ -161,6 +172,25 @@ void Funcionalidades::cargarCSV()
     std::cout<<"Libros Cargados a la Biblioteca"<< std::endl;
     std::cout <<"Libros Validos: "<< librosValidos <<std::endl;
     std::cout <<"Libros No Validos: "<< librosNoValidos <<std::endl;
+
+}
+
+void Funcionalidades::buscarISBN()
+{
+    std::string ISBN = "978-84-556-8979-7";
+    Libro* libroBuscado = listaOrdenada->busquedaISBN(ISBN);
+    Libro* libroBuscadoNormal = listaSinOrdenar->buscarISBN(ISBN);
+    if (libroBuscado != nullptr && libroBuscadoNormal != nullptr)
+    {
+
+        std::cout << "✓ Libro encontrado:" << std::endl;
+        libroBuscado->imprimirInformacion();
+    }
+    else
+    {
+        std::cout << "✗ Libro no encontrado" << std::endl;
+    }
+
 
 }
 
@@ -207,4 +237,12 @@ bool Funcionalidades::esISBNValida(const std::string& isbn)
         return false;
     }
     return true;
+}
+
+void Funcionalidades::ListarLibros()
+{
+    std::cout<<"---------------------------- NORMAL --------------------------"<<std::endl;
+    listaSinOrdenar->imprimir();
+    std::cout<<"---------------------------- Ordenado --------------------------"<<std::endl;
+    listaOrdenada->imprimir();
 }

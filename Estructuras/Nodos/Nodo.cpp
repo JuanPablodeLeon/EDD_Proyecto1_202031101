@@ -24,7 +24,3 @@ void Nodo::setSiguiente(Nodo* siguiente)
     this->siguiente = siguiente;
 }
 
-Libro Nodo::getLibro() const
-{
-    return this->libro;
-}

@@ -12,15 +12,17 @@
 #include <unordered_map>
 #include <iomanip>
 #include "../ArchivosH/ListaEnlazada/ListaNormal.h"
+#include "../ArchivosH/ListaEnlazada/ListaOrdenada.h"
 
 class Funcionalidades
 {
 private:
     ListaNormal* listaSinOrdenar;
+    ListaOrdenada* listaOrdenada;
     void textoMenu();
     void cargarCSV();
  //   void buscarTitulo();
-  //  void buscarISBN();
+    void buscarISBN();
   //  void buscarGenero();
   //  void buscarFecha();
   //  void EliminarLibro();

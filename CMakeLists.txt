@@ -23,4 +23,6 @@ add_executable(EDD_Proyecto1_202031101 main.cpp
         ArchivosH/ListaEnlazada/ListaNormal.h
         Estructuras/ListaEnlazada/ListaOrdenada.cpp
         ArchivosH/ListaEnlazada/ListaOrdenada.h
+        Funciones/MedidorTiempo.cpp
+        ArchivosH/Funciones/MedidorTiempo.h
 )
