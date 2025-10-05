@@ -8,12 +8,14 @@ Funcionalidades::Funcionalidades()
 {
     listaSinOrdenar = new ListaNormal();
     listaOrdenada = new ListaOrdenada();
+    listaTitulo = new AVL();
 }
 
 Funcionalidades::~Funcionalidades()
 {
     delete listaSinOrdenar;
     delete listaOrdenada;
+    delete listaTitulo;
 }
 
 
@@ -62,6 +64,7 @@ void Funcionalidades::menu()
 
         /*------- Buscquedas --------*/
         case 2: //Titulo
+            buscarTitulo();
             break;
         case 3:// ISBN
             buscarISBN();
@@ -128,6 +131,7 @@ void Funcionalidades::cargarCSV()
 
         if (std::getline(ss, titulo, ',') && std::getline(ss, isbn, ',') && std::getline(ss, genero, ',') && std::getline(ss, fecha, ',') && std::getline(ss, autor))
         {
+        //MODIFICAR VERIFICACION SI LA COMILLA ESTA VACIA
             if (!titulo.empty() && !isbn.empty() && !genero.empty() && !fecha.empty() && !autor.empty())
             {
                 if (verificarComillas(titulo) && verificarComillas(isbn) && verificarComillas(genero) && verificarComillas(fecha) && verificarComillas(autor))
@@ -141,10 +145,11 @@ void Funcionalidades::cargarCSV()
 
                     if (esFechaValida(fecha) && esISBNValida(isbn))
                     {
-                        if (listaOrdenada->buscarISBN(isbn) == nullptr)
+                        if (listaOrdenada->busquedaSinTiempo(isbn) == nullptr)
                         {
                             listaOrdenada->insertar(Libro(titulo, isbn,genero,fecha,autor));
                             listaSinOrdenar->insertar(Libro(titulo, isbn,genero,fecha,autor));
+                            listaTitulo->insertar(Libro(titulo, isbn,genero,fecha,autor));
                             librosValidos++;
                         }
                         else
@@ -184,21 +189,42 @@ void Funcionalidades::cargarCSV()
 
 void Funcionalidades::buscarISBN()
 {
-    std::string ISBN = "978-84-556-8979-7";
-    Libro* libroBuscado = listaOrdenada->busquedaISBN(ISBN);
+    std::string ISBN;
+    std::cout << "Ingrese ISBN a buscar:" << std::endl;
+    std::cin >> ISBN;
+    Libro* libroBuscado = listaOrdenada->busquedaTiempo(ISBN);
     Libro* libroBuscadoNormal = listaSinOrdenar->buscarISBN(ISBN);
+
     if (libroBuscado != nullptr && libroBuscadoNormal != nullptr)
     {
 
-        std::cout << "✓ Libro encontrado:" << std::endl;
+        std::cout << "Libro encontrado:" << std::endl;
         libroBuscado->imprimirInformacion();
     }
     else
     {
-        std::cout << "✗ Libro no encontrado" << std::endl;
+        std::cout << "Libro no encontrado" << std::endl;
     }
+}
 
+//Agregar Busqueda
+void Funcionalidades::buscarTitulo()
+{
+    std::string titulo = "Don Quijote de la Mancha";
+  //  std::cout << "Ingrese el Titulo a Buscar: " << std::endl;
+    //std::cin >> titulo;
+    Libro* TituloBuscado = listaSinOrdenar->buscarTitulo(titulo);
+    Libro* TituloBuscadoAVL = listaTitulo->buscarLibro(titulo);
 
+    if (TituloBuscadoAVL != nullptr && TituloBuscado != nullptr)
+    {
+        std::cout << "Libro encontrado:" << std::endl;
+        TituloBuscadoAVL->imprimirInformacion();
+    }
+    else
+    {
+        std::cout<< "Libro no encontrado" << std::endl;
+    }
 }
 
 
@@ -252,4 +278,6 @@ void Funcionalidades::ListarLibros()
     listaSinOrdenar->imprimir();
     std::cout<<"---------------------------- Ordenado --------------------------"<<std::endl;
     listaOrdenada->imprimir();
+    std::cout<<"---------------------------- Titulos --------------------------"<<std::endl;
+    listaTitulo->imprimir();
 }

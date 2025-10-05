@@ -13,15 +13,17 @@
 #include <iomanip>
 #include "../ArchivosH/ListaEnlazada/ListaNormal.h"
 #include "../ArchivosH/ListaEnlazada/ListaOrdenada.h"
+#include "../ArchivosH/Arboles/AVL.h"
 
 class Funcionalidades
 {
 private:
     ListaNormal* listaSinOrdenar;
     ListaOrdenada* listaOrdenada;
+    AVL* listaTitulo;
     void textoMenu();
     void cargarCSV();
- //   void buscarTitulo();
+    void buscarTitulo();
     void buscarISBN();
   //  void buscarGenero();
   //  void buscarFecha();

@@ -13,12 +13,13 @@ class ListaOrdenada : public Lista
         void insertarISBN(Libro libro);
         Nodo* obtenerPosicionNodo(int indice);
         std::string conversionISBN(std::string ISBN);
+        Libro* busquedaISBN(std::string ISBN);
     public:
         ListaOrdenada();
         ~ListaOrdenada();
         void insertar(Libro libro) override;
-        Libro* busquedaISBN(std::string ISBN);
-
+        Libro* busquedaTiempo(std::string isbn);
+        Libro* busquedaSinTiempo(std::string isbn);
 };
 
 

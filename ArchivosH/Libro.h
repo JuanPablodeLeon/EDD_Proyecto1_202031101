@@ -14,7 +14,7 @@ private:
     std::string genero;
     std::string fecha;
     std::string autor;
-
+;
 public:
     Libro();
     ~Libro();
@@ -33,6 +33,7 @@ public:
     void setAutor(std::string autor);
 
     void imprimirInformacion();
+    int conversionInt() const;
 };
 
 

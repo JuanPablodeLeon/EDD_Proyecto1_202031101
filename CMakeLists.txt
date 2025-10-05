@@ -6,11 +6,13 @@ set(CMAKE_CXX_STANDARD 20)
 include_directories(ArchivosH)
 include_directories(ArchivosH/Funciones)
 include_directories(ArchivosH/ListaEnlazada)
+include_directories(ArchivosH/Arboles)
+include_directories(ArchivosH/Nodos)
 
 add_executable(EDD_Proyecto1_202031101 main.cpp
         ArchivosH/Pila/Pila.h
         ArchivosH/Cola/Cola.h
-        Arboles/arbol_AVL.cpp
+        Arboles/AVL.cpp
         ObjetosLibros/Libro.cpp
         ArchivosH/Libro.h
         Estructuras/Nodos/Nodo.cpp
@@ -25,4 +27,10 @@ add_executable(EDD_Proyecto1_202031101 main.cpp
         ArchivosH/ListaEnlazada/ListaOrdenada.h
         Funciones/MedidorTiempo.cpp
         ArchivosH/Funciones/MedidorTiempo.h
+        Estructuras/Nodos/NodoAVL.cpp
+        ArchivosH/Nodos/NodoAVL.h
+        Arboles/B.cpp
+        ArchivosH/Arboles/B.h
+        Estructuras/Nodos/NodoB.cpp
+        ArchivosH/Nodos/NodoB.h
 )

@@ -79,3 +79,9 @@ void Libro::imprimirInformacion()
     std::cout << "Autor: " << getAutor() << std::endl;*/
 
 }
+
+int Libro::conversionInt() const
+{
+    return std::stoi(fecha);
+}
+

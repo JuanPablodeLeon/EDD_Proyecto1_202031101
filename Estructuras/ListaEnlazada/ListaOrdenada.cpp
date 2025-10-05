@@ -56,7 +56,6 @@ void ListaOrdenada::insertarISBN(Libro libro)
 
 Libro* ListaOrdenada::busquedaISBN(std::string ISBN)
 {
-    MedidorTiempo timer("Busqueda ISBN Binario");
     if (!primero) return nullptr;
 
     std::string ISBNbuscado = conversionISBN(ISBN);
@@ -88,6 +87,16 @@ Libro* ListaOrdenada::busquedaISBN(std::string ISBN)
     return nullptr;
 }
 
+Libro* ListaOrdenada::busquedaSinTiempo(std::string isbn)
+{
+    return busquedaISBN(isbn);
+}
+
+Libro* ListaOrdenada::busquedaTiempo(std::string isbn)
+{
+    MedidorTiempo timer("Busqueda ISBN Binario");
+    return busquedaISBN(isbn);
+}
 
 std::string ListaOrdenada::conversionISBN(std::string ISBN)
 {
