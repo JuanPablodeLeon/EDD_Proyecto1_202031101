@@ -41,3 +41,13 @@ Opcion 2: En caso de no querer clonarlo haciendo uso de la terminal descargarlo 
 
 Abrir una terminal dentro del proyecto clonado previamente y ejecutar los siguiente
 
+### En Windows
+```bash
+EDD_Proyecto1_202031101.exe
+```
+
+### En Linux/Mac
+```bash
+./EDD_Proyecto1_202031101
+```
+

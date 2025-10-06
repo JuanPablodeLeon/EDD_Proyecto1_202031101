@@ -12,8 +12,6 @@ include_directories(ArchivosH/Arboles)
 include_directories(ArchivosH/Nodos)
 
 add_executable(EDD_Proyecto1_202031101 main.cpp
-        ArchivosH/Pila/Pila.h
-        ArchivosH/Cola/Cola.h
         Arboles/AVL.cpp
         ObjetosLibros/Libro.cpp
         ArchivosH/Libro.h

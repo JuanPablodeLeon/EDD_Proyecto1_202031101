@@ -89,6 +89,7 @@ void Funcionalidades::menu()
             ListarLibros();
             break;
         case 8: //Graficas
+            GraficarArboles();
             break;
         case 0: //Salir del programa
             std::cout<<"Saliendo del Programa"<<std::endl;
