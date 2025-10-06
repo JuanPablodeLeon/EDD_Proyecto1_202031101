@@ -3,7 +3,6 @@
 //
 
 #include "../../ArchivosH/Nodos/NodoB.h"
-
 #include <iostream>
 
 #include "Nodo.h"
@@ -87,7 +86,7 @@ void NodoB::showRangeDetailed(int low, int high)
     }
 }
 
-void NodoB::insertNonFull(const Libro& libro)
+void NodoB::insertNonFull(Libro libro)
 {
     int fechaInt = libro.conversionInt();
     int i = n - 1;
@@ -329,4 +328,21 @@ void NodoB::merge(int idX)
     delete sibling;
 }
 
+void NodoB::generateGraphivz(std::ofstream& file, int& nodeCount)
+{
+    int currentNode = nodeCount;
 
+    file << "  node" << currentNode << " [label=\"";
+    for (int i = 0; i < n; i++) {
+        file << "<f" << i << "> |" << fechas[i] << "\\n" << libros[i].getTitulo().substr(0,10) << "...|";
+    }
+    file << "<f" << n << ">\"];" << std::endl;
+
+    if (!hoja) {
+        for (int i = 0; i <= n; i++) {
+            nodeCount++;
+            file << "  \"node" << currentNode << "\":f" << i << " -> \"node" << nodeCount << "\";" << std::endl;
+            C[i]->generateGraphivz(file, nodeCount);
+        }
+    }
+}

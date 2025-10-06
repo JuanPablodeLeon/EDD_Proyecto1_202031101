@@ -5,7 +5,10 @@
 #ifndef EDD_PROYECTO1_202031101_NODOB_H
 #define EDD_PROYECTO1_202031101_NODOB_H
 #include "Libro.h"
-#include "B.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+
 class NodoB
 {
     Libro* libros;
@@ -20,7 +23,7 @@ class NodoB
     NodoB(int _t, bool _hoja);
     void imprimir();
     int findKey(int fecha);
-    void insertNonFull(const Libro& libro);
+    void insertNonFull(Libro libro);
     void splitChild(int i, NodoB* y);
     void remove(int fecha);
     void removeFromLeaf(int idX);
@@ -35,7 +38,7 @@ class NodoB
     void showRange(int low, int high);
     void showRangeDetailed(int low, int high);
 
-  //  void generateGraphivz(std::ofstream &file, int & nodeCount);
+    void generateGraphivz(std::ofstream &file, int & nodeCount);
 
     friend class B;
 };

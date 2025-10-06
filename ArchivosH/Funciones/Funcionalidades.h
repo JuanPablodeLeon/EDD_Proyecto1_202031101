@@ -14,6 +14,7 @@
 #include "../ArchivosH/ListaEnlazada/ListaNormal.h"
 #include "../ArchivosH/ListaEnlazada/ListaOrdenada.h"
 #include "../ArchivosH/Arboles/AVL.h"
+#include "../ArchivosH/Arboles/B.h"
 
 class Funcionalidades
 {
@@ -21,16 +22,18 @@ private:
     ListaNormal* listaSinOrdenar;
     ListaOrdenada* listaOrdenada;
     AVL* listaTitulo;
+    B* listaFechas;
     void textoMenu();
     void cargarCSV();
     void buscarTitulo();
     void buscarISBN();
   //  void buscarGenero();
-  //  void buscarFecha();
-  //  void EliminarLibro();
+    void buscarFecha();
+    void EliminarLibro();
     void ListarLibros();
   //  void GraficarArboles();
 
+    int conversionInt(const std::string &fecha);
     bool esFechaValida(const std::string& fecha);
     bool verificarComillas(const std::string& palabra);
     bool esISBNValida(const std::string& isbn);

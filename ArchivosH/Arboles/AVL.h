@@ -21,7 +21,7 @@ class AVL
         NodoAVL* rotacionIzquierda(NodoAVL* dato);
         NodoAVL* insertar(NodoAVL* nodo, Libro libro);
         NodoAVL* valorMinimo(NodoAVL* nodo);
-        NodoAVL* eliminar(NodoAVL* raiz, Libro libro);
+        NodoAVL* eliminar(NodoAVL* raiz, std::string titulo);
         void imprimirInOrder(NodoAVL* raiz);
         bool buscar(NodoAVL* raiz, std::string titulo);
         std::string conversionLowerCase(const std::string& string);
@@ -31,7 +31,7 @@ class AVL
 
         AVL();
         void insertar(Libro libro);
-        void eliminar(Libro libro);
+        void eliminar(std::string titulo);
         bool buscar(std::string titulo);
         void imprimir();
         Libro* buscarLibro(std::string titulo);

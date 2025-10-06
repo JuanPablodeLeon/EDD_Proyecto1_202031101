@@ -117,42 +117,44 @@ NodoAVL* AVL::valorMinimo(NodoAVL* nodo)
     return temp;
 }
 
-NodoAVL* AVL::eliminar(NodoAVL* raiz, Libro libro)
+NodoAVL* AVL::eliminar(NodoAVL* raiz, std::string titulo)
 {
     if (raiz == nullptr)
             {
                 return raiz;
             }
 
-            if (libro.getTitulo() < raiz->libro.getTitulo())
+        std::string tituloLower = conversionLowerCase(titulo);
+        std::string nodoLower = conversionLowerCase(raiz->libro.getTitulo());
+
+            if (tituloLower < nodoLower)
             {
-                raiz->izquierda = eliminar(raiz->izquierda, libro);
+                raiz->izquierda = eliminar(raiz->izquierda, titulo);
             }
-            else if (libro.getTitulo() > raiz->libro.getTitulo())
+            else if (tituloLower > nodoLower)
             {
-                raiz->derecha = eliminar(raiz->derecha, libro);
+                raiz->derecha = eliminar(raiz->derecha, titulo);
             }
             else
             {
-                if ((raiz->izquierda == nullptr) || (raiz->derecha == nullptr))
+                if (raiz->izquierda == nullptr)
                 {
-                    NodoAVL* temp = raiz->izquierda ? raiz->izquierda : raiz->derecha;
-                    if (temp == nullptr)
-                    {
-                        temp = raiz;
-                        raiz = nullptr;
-                    }
-                    else
-                    {
-                        *raiz = *temp;
-                    }
-                    delete temp;
+                    NodoAVL* temp = raiz->derecha;
+                    delete raiz;
+                    return temp;
+                }
+                else if (raiz->derecha == nullptr)
+                {
+                    NodoAVL* temp = raiz->izquierda;
+                    delete raiz;
+                    return temp;
+
                 }
                 else
                 {
                     NodoAVL* temp = valorMinimo(raiz->derecha);
                     raiz->libro = temp->libro;
-                    raiz->derecha = eliminar(raiz->derecha, temp->libro);
+                    raiz->derecha = eliminar(raiz->derecha, temp->libro.getTitulo());
                 }
 
             }
@@ -247,9 +249,9 @@ void AVL::insertar(Libro libro)
     raiz = insertar(raiz, libro);
 }
 
-void AVL::eliminar(Libro libro)
+void AVL::eliminar(std::string titulo)
 {
-    raiz = eliminar(raiz, libro);
+    raiz = eliminar(raiz, titulo);
 }
 
 bool AVL::buscar(std::string titulo)

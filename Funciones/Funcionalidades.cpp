@@ -4,11 +4,14 @@
 
 #include "../ArchivosH/Funciones/Funcionalidades.h"
 
+#include <bits/atomic_wait.h>
+
 Funcionalidades::Funcionalidades()
 {
     listaSinOrdenar = new ListaNormal();
     listaOrdenada = new ListaOrdenada();
     listaTitulo = new AVL();
+    listaFechas = new B(3);
 }
 
 Funcionalidades::~Funcionalidades()
@@ -16,6 +19,7 @@ Funcionalidades::~Funcionalidades()
     delete listaSinOrdenar;
     delete listaOrdenada;
     delete listaTitulo;
+    delete listaFechas;
 }
 
 
@@ -72,10 +76,12 @@ void Funcionalidades::menu()
         case 4: //Genero
             break;
         case 5: //Fecha
+            buscarFecha();
             break;
         /*------- Fin Busquedas --------*/
 
         case 6: //Eliminaciones
+            EliminarLibro();
             break;
         case 7: //Listado por Titulos (AVL inorder)
             ListarLibros();
@@ -147,9 +153,12 @@ void Funcionalidades::cargarCSV()
                     {
                         if (listaOrdenada->busquedaSinTiempo(isbn) == nullptr)
                         {
+                            std::cout<<"Entra a agregar" << std::endl;
                             listaOrdenada->insertar(Libro(titulo, isbn,genero,fecha,autor));
                             listaSinOrdenar->insertar(Libro(titulo, isbn,genero,fecha,autor));
                             listaTitulo->insertar(Libro(titulo, isbn,genero,fecha,autor));
+                            std::cout<<"Entra a agregar" << std::endl;
+                            listaFechas->insertar(Libro(titulo, isbn,genero,fecha,autor));
                             librosValidos++;
                         }
                         else
@@ -191,7 +200,7 @@ void Funcionalidades::buscarISBN()
 {
     std::string ISBN;
     std::cout << "Ingrese ISBN a buscar:" << std::endl;
-    std::cin >> ISBN;
+    std::getline(std::cin, ISBN);
     Libro* libroBuscado = listaOrdenada->busquedaTiempo(ISBN);
     Libro* libroBuscadoNormal = listaSinOrdenar->buscarISBN(ISBN);
 
@@ -210,9 +219,13 @@ void Funcionalidades::buscarISBN()
 //Agregar Busqueda
 void Funcionalidades::buscarTitulo()
 {
-    std::string titulo = "Don Quijote de la Mancha";
-  //  std::cout << "Ingrese el Titulo a Buscar: " << std::endl;
-    //std::cin >> titulo;
+    std::cin.ignore();
+    std::string titulo;
+
+    std::cout << "Ingrese el Titulo a Buscar: " << std::endl;
+
+    std::getline(std::cin, titulo);
+
     Libro* TituloBuscado = listaSinOrdenar->buscarTitulo(titulo);
     Libro* TituloBuscadoAVL = listaTitulo->buscarLibro(titulo);
 
@@ -274,10 +287,62 @@ bool Funcionalidades::esISBNValida(const std::string& isbn)
 
 void Funcionalidades::ListarLibros()
 {
-    std::cout<<"---------------------------- NORMAL --------------------------"<<std::endl;
+   /* std::cout<<"---------------------------- NORMAL --------------------------"<<std::endl;
     listaSinOrdenar->imprimir();
     std::cout<<"---------------------------- Ordenado --------------------------"<<std::endl;
-    listaOrdenada->imprimir();
+    listaOrdenada->imprimir();*/
     std::cout<<"---------------------------- Titulos --------------------------"<<std::endl;
     listaTitulo->imprimir();
+}
+
+int Funcionalidades::conversionInt(const std::string& fecha)
+{
+    return std::stoi(fecha);
+}
+
+
+void Funcionalidades::buscarFecha()
+{
+    std::cin.ignore();
+    std::string fechaInicial;
+    std::string fechaFinal;
+    std::cout <<"Ingrese la Fecha Inicial"<< std::endl;
+    std::cin >> fechaInicial;
+    std::cout <<"Ingrese la Fecha FInal"<< std::endl;
+    std::cin >> fechaFinal;
+
+    if (esFechaValida(fechaInicial) && esFechaValida(fechaFinal))
+    {
+        int inicial = conversionInt(fechaInicial);
+        int final = conversionInt(fechaFinal);
+
+        listaFechas->showRangeDetailed(inicial, final);
+
+        std::cout<<"Son Ambas fechas validas"<< std::endl;
+    }
+}
+
+void Funcionalidades::EliminarLibro()
+{
+    std::cin.ignore();
+    std::string LibroBuscar;
+    std::cout <<"Ingrese el ISBN del libro"<< std::endl;
+    std::getline(std::cin, LibroBuscar);
+
+    Libro* libroEliminar = listaOrdenada->buscarISBN(LibroBuscar);
+    if (libroEliminar != nullptr)
+    {
+        std::string refISBN = LibroBuscar;
+        std::string refTitulo = libroEliminar->getTitulo();
+        std::cout<<"El Libro a Eliminar es el Siguiente "<< std::endl;
+        libroEliminar->imprimirInformacion();
+
+        listaSinOrdenar->eliminar(refISBN);
+        listaOrdenada->eliminar(LibroBuscar);
+        //std::cout<<"|| "<< refISBN <<" || "<<refTitulo<< std::endl;
+        listaTitulo->eliminar(refTitulo);
+        //Agregar la eliminacion en B
+
+        std::cout<<"Eliminado "<< std::endl;
+    }
 }
